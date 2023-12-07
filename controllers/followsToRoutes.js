@@ -49,7 +49,7 @@ router.get("/:id", (req, res) => {
 
 // get a user
 
-router.get("findUser/:id", (req, res) => {
+router.get("/findUser/:id", (req, res) => {
     User.findOne({
         include: [Posts, Likes],
         where: {
