@@ -47,24 +47,24 @@ router.get("/:id", (req, res) => {
     })
 });
 
-// get a user
+// // get a user
 
-router.get("/findUser/:id", (req, res) => {
-    User.findOne({
-        include: [Posts, Likes],
-        where: {
-            id: req.params.id,
-        }
-    }).then(dbUser => {
-        if (!dbUser) {
-            res.status(404).json({ msg: "no such user!" })
-        } else {
-            res.json(dbUser)
-        }
-    }).catch(err => {
-        res.status(500).json({ msg: "oh no!", err })
-    })
-})
+// router.get("/findUser/:id", (req, res) => {
+//     User.findOne({
+//         include: [Posts, Likes],
+//         where: {
+//             id: req.params.id,
+//         }
+//     }).then(dbUser => {
+//         if (!dbUser) {
+//             res.status(404).json({ msg: "no such user!" })
+//         } else {
+//             res.json(dbUser)
+//         }
+//     }).catch(err => {
+//         res.status(500).json({ msg: "oh no!", err })
+//     })
+// })
 
 
 //create a following
