@@ -30,10 +30,10 @@ getUserId_1().then((userId) => {
                     // console.log(data[i]);
                     fetch(`/api/users/${data[i].FollowId}`).then(res => res.json()).then(res2 => {
                         console.log(`I am a follower of !! i : ${i}`);
-                        follower = res2.username;
-                        console.log(follower);
+                        let follower_1 = res2.username;
+                        console.log(follower_1);
                         const listItem = document.createElement('li');
-                        listItem.textContent = follower;
+                        listItem.textContent = follower_1;
                         followerList.appendChild(listItem);
                     });
 
