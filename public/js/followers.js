@@ -28,7 +28,7 @@ getUserId_1().then((userId) => {
 
                 for (let i = 0; i < data.length; i++) {
                     // console.log(data[i]);
-                    fetch(`/api/users/${data[i].FollowId}`).then(res => res.json()).then(res2 => {
+                    fetch(`/api/followedBy/findUser/${data[i].FollowId}`).then(res => res.json()).then(res2 => {
                         console.log(`I am a follower of !! i : ${i}`);
                         let follower_1 = res2.username;
                         console.log(follower_1);

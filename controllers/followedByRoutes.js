@@ -47,6 +47,26 @@ router.get("/:id", (req, res) => {
     })
 });
 
+
+router.get("/findUser/:id", (req, res) => {
+    User.findOne({
+        include: [Posts, Likes],
+        where: {
+            id: req.params.id,
+        }
+    }).then(dbUser => {
+        if (!dbUser) {
+            res.status(404).json({ msg: "no such user!" })
+        } else {
+            res.json(dbUser)
+        }
+    }).catch(err => {
+        res.status(500).json({ msg: "oh no!", err })
+    })
+})
+
+
+
 //create a follower
 router.post('/', isAuthenticated, async(req, res) => {
     followedBy.create({
