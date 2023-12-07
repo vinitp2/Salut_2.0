@@ -19,8 +19,11 @@ router.get("/logout", (req, res) => {
 
 //find one
 router.get("/:id", (req, res) => {
-    User.findByPk(req.params.id, {
-        include: [Posts, Likes]
+    User.findOne({
+        include: [Posts, Likes],
+        where: {
+            id: req.params.id,
+        }
     }).then(dbUser => {
         if (!dbUser) {
             res.status(404).json({ msg: "no such user!" })
