@@ -14,7 +14,7 @@ document.querySelector("#loginForm").addEventListener("click", e => {
         if (res.ok) {
             location.href = "/profile";
         } else {
-            alert(res[0]);
+            alert("Something Went wrong !");
         }
     })
 
