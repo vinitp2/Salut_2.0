@@ -50,7 +50,7 @@ router.get("/:id", (req, res) => {
 //create a following
 router.post('/', isAuthenticated, async(req, res) => {
     followsTo.create({
-            UserId: req.session.user.id, //current user
+            UserId: req.body.UserId, //current user
             FollowId: req.body.FollowId, //person user is going to follow
             // doYouFollow: true,
         }).then((newfollow) => {
