@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require("bcrypt");
-const {User,Likes, Posts} = require('../models');
+const {User, Likes, Posts, Follow,  followedBy, followsTo} = require('../models');
 const isMyPost = require('../middleware/isMyPost');
 
 //find all
@@ -51,11 +51,11 @@ router.get('/getUserIdByUsername/:username', async (req, res) => {
     }
   });
 //find by username
-router.get("/findUser/:username",(req,res)=>{
+router.get("/findUser/:id",(req,res)=>{
     User.findOne({
         include:[Posts, Likes],
         where: {
-            username: req.params.username,
+            id: req.params.id,
     }}).then(foundUser=>{
         if(!foundUser){
             res.status(404).json({msg:"no such user!"})
@@ -71,7 +71,24 @@ router.get("/findUser/:username",(req,res)=>{
         res.status(500).json({msg:"oh no!",err})
     })
 });
-
+router.get('/getUsernameById/:id', async (req, res) => {
+    try {
+      const id = req.params.id;
+      const user = await User.findOne({
+        where: { id: id },
+        attributes: ['username'],
+      });
+  
+      if (user) {
+        res.json({ username: user.username });
+      } else {
+        res.status(404).json({ error: 'User not found' });
+      }
+    } catch (error) {
+      console.error('Error:', error.message);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
 
 //create
 router.post("/",(req,res)=>{
